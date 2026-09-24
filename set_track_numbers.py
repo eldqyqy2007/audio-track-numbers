@@ -50,8 +50,15 @@ Supported formats: mp3, flac, ogg, m4a/mp4
 Requirements:
     pip install mutagen --break-system-packages
 
+PREVIEW AND CONFIRMATION:
+Before any tag is written, the tool prints a preview of every file that
+would change (old tag -> new tag) and asks for confirmation. Nothing is
+modified until you answer "y". Pass --yes (or -y) to skip the question,
+for example when running the tool from a script.
+
 Usage:
     python set_track_numbers.py "/path/to/folder"
+    python set_track_numbers.py "/path/to/folder" --yes
 """
 
 import os
@@ -353,9 +360,32 @@ def set_track_number(path, track_num, total):
         raise ValueError(f"Unsupported format: {ext}")
 
 
+def confirm(prompt):
+    """Ask a yes/no question. Returns True only for an explicit yes."""
+    while True:
+        answer = input(prompt).strip().lower()
+        if answer in ("y", "yes"):
+            return True
+        if answer in ("n", "no"):
+            return False
+        print("Please answer with y or n.\n")
+
+
+def format_tag(info):
+    """Human-readable form of a (track, total) tuple read from a file."""
+    if info is None:
+        return "(no track tag)"
+    num, total = info
+    return f"{num}/{total}" if total else f"{num}"
+
+
 def main():
-    if len(sys.argv) > 1:
-        folder = sys.argv[1]
+    args = sys.argv[1:]
+    assume_yes = any(a in ("-y", "--yes") for a in args)
+    args = [a for a in args if a not in ("-y", "--yes")]
+
+    if args:
+        folder = args[0]
     else:
         folder = input("Enter the folder path: ").strip().strip('"')
 
@@ -374,19 +404,39 @@ def main():
 
     print(f"Found {total} audio file(s). Checking existing tags...\n")
 
-    updated = 0
+    # Build the plan first. Nothing is written during this step.
+    to_change = []  # (filename, current_tag, new_track_number)
     skipped = 0
-    failed = 0
 
     for filename, track_num in sorted(zip(files, track_numbers), key=lambda x: x[1]):
         full_path = os.path.join(folder, filename)
-
         current = get_current_track_info(full_path)
         if current is not None and current == (track_num, total):
-            print(f"[skip]   {filename}  (already Track {track_num}/{total})")
             skipped += 1
-            continue
+        else:
+            to_change.append((filename, current, track_num))
 
+    if not to_change:
+        print(f"All {total} file(s) already have the correct track tags. Nothing to do.")
+        return
+
+    print("Preview of the changes (nothing has been written yet):\n")
+    for filename, current, track_num in to_change:
+        print(f"  {filename}:  {format_tag(current)}  ->  {track_num}/{total}")
+    if skipped:
+        print(f"\n{skipped} file(s) already correct and will be left untouched.")
+
+    print()
+    if not assume_yes and not confirm(f"Write these tags to {len(to_change)} file(s)? (y/n): "):
+        print("\nCancelled. No files were changed.")
+        return
+    print()
+
+    updated = 0
+    failed = 0
+
+    for filename, _, track_num in to_change:
+        full_path = os.path.join(folder, filename)
         try:
             set_track_number(full_path, track_num, total)
             print(f"[fixed]  {filename}  ->  Track {track_num}/{total}")

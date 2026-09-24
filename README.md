@@ -23,6 +23,7 @@ It also handles a common real-world problem: **incomplete series**. If you only 
 
 ## Features
 
+- **Preview before writing** – shows every file that would change (old tag → new tag) and asks for confirmation. Nothing is modified until you answer `y`.
 - **Relative track numbering** – track number = the file's rank among the files that are actually present.
 - **Track Total** – automatically set to the number of audio files in the folder.
 - **Smart number detection** – finds the track number anywhere in the file name (start, middle, or end) and ignores numbers that are clearly something else:
@@ -88,6 +89,12 @@ Or run it without arguments and enter the path when asked:
 python3 set_track_numbers.py
 ```
 
+Add `--yes` (or `-y`) to skip the confirmation question, for example when running the tool from a script:
+
+```bash
+python3 set_track_numbers.py "/path/to/folder" --yes
+```
+
 On Termux, run `termux-setup-storage` once, then use a path under `~/storage/shared/`:
 
 ```bash
@@ -99,13 +106,24 @@ python3 set_track_numbers.py ~/storage/shared/Music/course
 ```text
 Found 4 audio file(s). Checking existing tags...
 
-[fixed]  30 - Episode.mp3  ->  Track 1/4
-[skip]   31 - Episode.mp3  (already Track 2/4)
-[fixed]  32 - Episode.mp3  ->  Track 3/4
-[fixed]  33 - Episode.mp3  ->  Track 4/4
+Preview of the changes (nothing has been written yet):
+
+  30.mp3:  (no track tag)  ->  1/4
+  32.mp3:  9/8  ->  3/4
+  33.mp3:  (no track tag)  ->  4/4
+
+1 file(s) already correct and will be left untouched.
+
+Write these tags to 3 file(s)? (y/n): y
+
+[fixed]  30.mp3  ->  Track 1/4
+[fixed]  32.mp3  ->  Track 3/4
+[fixed]  33.mp3  ->  Track 4/4
 
 Done. Updated: 3, already correct (skipped): 1, failed: 0.
 ```
+
+Answer `n` at the confirmation prompt to cancel; no file is changed. If every file is already correct, the tool reports that and exits without asking anything.
 
 ---
 
@@ -115,7 +133,8 @@ Done. Updated: 3, already correct (skipped): 1, failed: 0.
 2. **Detect** – scores every number in each file name and picks the most likely track number. Explicit labels (`Track 7`, `#12`) score highest; years, bitrates, and disc numbers score lowest. If nothing scores well, the file is treated as "no number".
 3. **Rank** – sorts files by detected number and assigns positions `1…N`. Files with no number come after the numbered ones, in natural name order.
 4. **Compare** – reads the existing Track Number / Total tags. If they already equal the expected values, the file is skipped.
-5. **Write** – otherwise writes the new tags using the correct format for each file type.
+5. **Preview & confirm** – prints the files that would change (old tag → new tag) and waits for `y` or `n`. Nothing has been written at this point.
+6. **Write** – after confirmation, writes the new tags using the correct format for each file type.
 
 | Format | How the tags are stored |
 |---|---|
@@ -127,7 +146,7 @@ Done. Updated: 3, already correct (skipped): 1, failed: 0.
 
 ## Important Notes
 
-> **Tags are written in place, with no preview and no undo.** Try the tool on a **copy** of your folder first, especially the first time.
+> **Always read the preview carefully.** The tool only writes tags after you type `y`. Once confirmed, tags are changed in place and there is **no undo**, so consider trying it on a **copy** of your folder the first time. Using `--yes` skips the preview question entirely.
 
 - **Track Total counts every supported audio file in the folder.** If the folder mixes several albums or series, keep each one in its own folder.
 - **Only tags change.** File names and audio content are not modified.
@@ -157,7 +176,7 @@ Check their names for other numbers (dates, parts). Rename them so the track num
 
 Issues and pull requests are welcome. Ideas for future improvements:
 
-- Preview mode with a confirmation prompt before writing tags
+- Undo log (restore the previous tags after a run)
 - Recursive folder scanning
 - Support for more formats (WAV, WMA, Opus)
 
