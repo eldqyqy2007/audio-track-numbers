@@ -1,6 +1,17 @@
+<p align="center">
+  <img src="./assets/banner.svg" alt="Audio Track Numbers banner" width="100%">
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?labelColor=555" alt="license: MIT"></a>
+  <img src="https://img.shields.io/badge/python-3.6%2B-yellow?labelColor=555&logo=python&logoColor=white" alt="python: 3.6+">
+  <img src="https://img.shields.io/badge/dependencies-mutagen-orange?labelColor=555" alt="dependencies: mutagen">
+  <img src="https://img.shields.io/badge/formats-mp3_flac_ogg_m4a-blueviolet?labelColor=555" alt="formats: mp3_flac_ogg_m4a">
+</p>
+
 # Audio Track Numbers
 
-A command-line tool that writes correct **Track Number** and **Track Total** tags (for example `3/12`) to every audio file in a folder. It works out the order from the file names, so your player shows the files in the right sequence, even when the playlist is incomplete.
+A command-line tool that writes correct **Track Number** and **Track Total** tags (for example `3/12`) to every audio file in a folder. It works out the order from the file names, so your player shows the files in the right sequence, even when the playlist is incomplete. Every change is shown in a **preview** before anything is written.
 
 Supported formats: **MP3, FLAC, OGG, M4A/MP4**.
 
@@ -13,17 +24,32 @@ Supported formats: **MP3, FLAC, OGG, M4A/MP4**.
 
 ---
 
-## Why this tool?
+## Table of contents
 
-Music and audiobook players sort by the **Track Number tag**, not by file name. When that tag is empty or wrong, episodes play out of order. This tool fixes the tags in one pass for the whole folder.
+- [Why this tool](#why-this-tool)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [How it works](#how-it-works)
+- [Honest limitations](#honest-limitations)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
 
-It also handles a common real-world problem: **incomplete series**. If you only downloaded episodes 30 to 39, you probably want them to be tracks 1 to 10, not 30 to 39. The tool uses the numbers in the file names only to decide the *order*, then assigns tracks `1…N` based on each file's position.
+---
+
+## Why this tool
+
+Music and audiobook players sort by the **Track Number tag**, not by file name. When that tag is empty or wrong, episodes play out of order. This tool fixes the tags in one pass for the whole folder, across every common audio format, instead of editing each file's metadata by hand.
+
+It also handles a common real-world problem: **incomplete series**. If you only downloaded episodes 30 to 39, you probably want them to be tracks 1 to 10, not 30 to 39. The tool uses the numbers in the file names only to decide the *order*, then assigns tracks `1…N` based on each file's position among the files actually present.
 
 ---
 
 ## Features
 
-- **Preview before writing** – shows every file that would change (old tag → new tag) and asks for confirmation. Nothing is modified until you answer `y`.
+- **Preview before writing** – shows every file that would change (old tag → new tag) and asks for confirmation. Nothing is modified until you answer `y`. Pass `--yes` to skip the prompt.
 - **Relative track numbering** – track number = the file's rank among the files that are actually present.
 - **Track Total** – automatically set to the number of audio files in the folder.
 - **Smart number detection** – finds the track number anywhere in the file name (start, middle, or end) and ignores numbers that are clearly something else:
@@ -127,13 +153,13 @@ Answer `n` at the confirmation prompt to cancel; no file is changed. If every fi
 
 ---
 
-## How It Works
+## How it works
 
 1. **Collect** – finds all supported audio files in the folder (sub-folders are not searched) and sorts them naturally by name.
 2. **Detect** – scores every number in each file name and picks the most likely track number. Explicit labels (`Track 7`, `#12`) score highest; years, bitrates, and disc numbers score lowest. If nothing scores well, the file is treated as "no number".
 3. **Rank** – sorts files by detected number and assigns positions `1…N`. Files with no number come after the numbered ones, in natural name order.
-4. **Compare** – reads the existing Track Number / Total tags. If they already equal the expected values, the file is skipped.
-5. **Preview & confirm** – prints the files that would change (old tag → new tag) and waits for `y` or `n`. Nothing has been written at this point.
+4. **Compare** – reads the existing Track Number / Total tags. Files that already have the correct values are left out of the plan.
+5. **Preview & confirm** – prints every file that would change, its current tag, and its new tag, then waits for `y` or `n` (skipped automatically with `--yes`). Nothing has been written at this point.
 6. **Write** – after confirmation, writes the new tags using the correct format for each file type.
 
 | Format | How the tags are stored |
@@ -144,15 +170,15 @@ Answer `n` at the confirmation prompt to cancel; no file is changed. If every fi
 
 ---
 
-## Important Notes
-
-> **Always read the preview carefully.** The tool only writes tags after you type `y`. Once confirmed, tags are changed in place and there is **no undo**, so consider trying it on a **copy** of your folder the first time. Using `--yes` skips the preview question entirely.
+## Honest limitations
 
 - **Track Total counts every supported audio file in the folder.** If the folder mixes several albums or series, keep each one in its own folder.
-- **Only tags change.** File names and audio content are not modified.
-- **Detection can guess wrong.** A name like `Song 2Pac.mp3` is read as track `2`. Names without any usable number are placed after the numbered files.
-- **Ranks, not literal numbers.** Files `00…100` become tracks `1…101`, and files `30…39` become tracks `1…10`. This is intentional.
-- Other tags (title, artist, album, and so on) are left as they are.
+- **Only tags change.** File names and audio content are never modified.
+- **Detection can guess wrong.** A name like `Song 2Pac.mp3` is read as track `2`. Names without any usable number are placed after the numbered files, so double-check the preview on unusually named files.
+- **Ranks, not literal numbers.** Files `00…100` become tracks `1…101`, and files `30…39` become tracks `1…10`. This is intentional, but worth knowing before you confirm.
+- **No undo after confirmation.** The preview is the safety net; once you type `y` (or use `--yes`), tags are written immediately with no automatic rollback. Consider trying the tool on a **copy** of your folder the first time.
+- **Other tags are left as they are.** Title, artist, album, and so on are untouched — only the track number / total fields change.
+- **No automated test suite.** Detection logic has been checked manually against a range of file-name patterns, not with CI or unit tests.
 
 ---
 
