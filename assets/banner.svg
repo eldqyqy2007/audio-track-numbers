@@ -1,0 +1,15 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="300" fill="#0d1117"/>
+  <rect x="0" y="0" width="1200" height="300" fill="none" stroke="#21262d" stroke-width="2"/>
+  <text x="60" y="130" font-family="Verdana, Arial, sans-serif" font-size="46" font-weight="bold" fill="#f0f6fc">Audio Track Numbers</text>
+  <text x="60" y="172" font-family="Verdana, Arial, sans-serif" font-size="20" fill="#8b949e">Correct Track Number / Total tags for a whole folder</text>
+  <text x="60" y="210" font-family="Verdana, Arial, sans-serif" font-size="16" fill="#484f58">Python · mutagen · MP3 · FLAC · OGG · M4A</text>
+
+  <g stroke="#a78bfa" stroke-width="3" fill="none">
+    <path d="M900 90 L980 90 L1040 150 L980 210 L900 210 Z"/>
+    <circle cx="925" cy="120" r="8" fill="#a78bfa"/>
+  </g>
+  <g font-family="Verdana, Arial, sans-serif" font-size="16" fill="#a78bfa">
+    <text x="960" y="156" text-anchor="middle">3/12</text>
+  </g>
+</svg>
