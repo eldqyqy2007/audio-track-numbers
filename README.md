@@ -34,7 +34,6 @@ Supported formats: **MP3, FLAC, OGG, M4A/MP4**.
 - [How it works](#how-it-works)
 - [Honest limitations](#honest-limitations)
 - [Troubleshooting](#troubleshooting)
-## <img src="./assets/icons/contributing.svg" alt="" width="24" height="24" align="absmiddle"> Contributing
 - [License](#license)
 
 ---
