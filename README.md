@@ -198,7 +198,7 @@ Check their names for other numbers (dates, parts). Rename them so the track num
 
 ---
 
-## <img src="./assets/icons/features.svg" alt="" width="24" height="24" align="absmiddle"> Contributing
+## <img src="./assets/icons/contributing.svg" alt="" width="24" height="24" align="absmiddle"> Contributing
 
 Issues and pull requests are welcome. Ideas for future improvements:
 
