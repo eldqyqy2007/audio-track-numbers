@@ -1,15 +1,8 @@
-<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="300" fill="#0d1117"/>
-  <rect x="0" y="0" width="1200" height="300" fill="none" stroke="#21262d" stroke-width="2"/>
-  <text x="60" y="130" font-family="Verdana, Arial, sans-serif" font-size="46" font-weight="bold" fill="#f0f6fc">Audio Track Numbers</text>
-  <text x="60" y="172" font-family="Verdana, Arial, sans-serif" font-size="20" fill="#8b949e">Correct Track Number / Total tags for a whole folder</text>
-  <text x="60" y="210" font-family="Verdana, Arial, sans-serif" font-size="16" fill="#484f58">Python · mutagen · MP3 · FLAC · OGG · M4A</text>
-
-  <g stroke="#a78bfa" stroke-width="3" fill="none">
-    <path d="M900 90 L980 90 L1040 150 L980 210 L900 210 Z"/>
-    <circle cx="925" cy="120" r="8" fill="#a78bfa"/>
-  </g>
-  <g font-family="Verdana, Arial, sans-serif" font-size="16" fill="#a78bfa">
-    <text x="960" y="156" text-anchor="middle">3/12</text>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="250" viewBox="0 0 1400 250">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08051b"/><stop offset="1" stop-color="#12072a"/></linearGradient></defs>
+<rect width="1400" height="250" rx="18" fill="url(#bg)"/><rect x="2" y="2" width="1396" height="246" rx="16" fill="none" stroke="#7047d9" stroke-width="2"/>
+<g transform="translate(62 48)"><path d="M15 8h82l35 35v118H15z" fill="#17103b" stroke="#a855f7" stroke-width="5"/><path d="M97 8v40h40" fill="none" stroke="#a855f7" stroke-width="5"/><path d="M46 72c17-14 34-14 51 0v29c-17-14-34-14-51 0z" fill="#a855f7"/><path d="M54 82v22M89 82v22" stroke="#170c32" stroke-width="5"/><rect x="38" y="126" width="77" height="28" rx="8" fill="#26155a"/><text x="51" y="147" fill="#eadcff" font-size="17" font-weight="800" font-family="Inter,Segoe UI,Arial,sans-serif">1/10</text></g>
+<text x="235" y="86" fill="#fbf8ff" font-size="48" font-weight="800" font-family="Inter,Segoe UI,Arial,sans-serif">Audio <tspan fill="#a855f7">Track Numbers</tspan></text><text x="238" y="126" fill="#d9cbea" font-size="22" font-family="Inter,Segoe UI,Arial,sans-serif">Set correct Track Number and Track Total tags.</text>
+<g font-family="Inter,Segoe UI,Arial,sans-serif" font-size="16" font-weight="700"><rect x="238" y="158" width="104" height="38" rx="19" fill="#180c35" stroke="#7047d9"/><text x="258" y="183" fill="#eee5ff">♫ MP3</text><rect x="354" y="158" width="108" height="38" rx="19" fill="#180c35" stroke="#7047d9"/><text x="374" y="183" fill="#eee5ff">〽 FLAC</text><rect x="474" y="158" width="108" height="38" rx="19" fill="#180c35" stroke="#7047d9"/><text x="494" y="183" fill="#eee5ff">〽 OGG</text><rect x="594" y="158" width="108" height="38" rx="19" fill="#180c35" stroke="#7047d9"/><text x="614" y="183" fill="#eee5ff">♫ M4A</text><rect x="714" y="158" width="138" height="38" rx="19" fill="#180c35" stroke="#7047d9"/><text x="734" y="183" fill="#eee5ff">◆ Metadata</text></g>
+<rect x="890" y="42" width="300" height="166" rx="14" fill="#09051a" stroke="#7047d9"/><text x="914" y="75" fill="#c99cff" font-size="18" font-weight="800" font-family="Inter,Segoe UI,Arial,sans-serif">ID3 / Metadata</text><line x1="914" y1="91" x2="1166" y2="91" stroke="#3c276b"/><text x="914" y="122" fill="#bdaed0" font-size="17" font-family="monospace">Track Number</text><text x="1110" y="122" fill="#fff" font-size="18" font-weight="800" font-family="monospace">02</text><text x="914" y="156" fill="#bdaed0" font-size="17" font-family="monospace">Track Total</text><text x="1110" y="156" fill="#fff" font-size="18" font-weight="800" font-family="monospace">10</text>
+<g transform="translate(1230 56)"><rect width="48" height="65" rx="7" fill="#211246" stroke="#a855f7"/><text x="12" y="91" fill="#caa9f9" font-size="15" font-family="monospace">1/10</text><rect x="58" width="48" height="65" rx="7" fill="#211246" stroke="#a855f7"/><text x="70" y="91" fill="#caa9f9" font-size="15" font-family="monospace">2/10</text><rect x="116" width="48" height="65" rx="7" fill="#211246" stroke="#a855f7"/><text x="128" y="91" fill="#caa9f9" font-size="15" font-family="monospace">3/10</text></g></svg>
