@@ -24,7 +24,7 @@ Supported formats: **MP3, FLAC, OGG, M4A/MP4**.
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Table of contents
+## <img src="./assets/icons/track.svg" alt="" width="28" height="28" align="absmiddle"> Table of contents
 
 - [Why this tool](#why-this-tool)
 - [Features](#features)
@@ -39,7 +39,7 @@ Supported formats: **MP3, FLAC, OGG, M4A/MP4**.
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Why this tool
+## <img src="./assets/icons/metadata.svg" alt="" width="28" height="28" align="absmiddle"> Why this tool
 
 Music and audiobook players sort by the **Track Number tag**, not by file name. When that tag is empty or wrong, episodes play out of order. This tool fixes the tags in one pass for the whole folder, across every common audio format, instead of editing each file's metadata by hand.
 
@@ -47,7 +47,7 @@ It also handles a common real-world problem: **incomplete series**. If you only 
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Features
+## <img src="./assets/icons/track.svg" alt="" width="28" height="28" align="absmiddle"> Features
 
 <img src="./assets/icons/feature.svg" alt="" width="18" height="18" align="absmiddle"> **Preview before writing** – shows every file that would change (old tag → new tag) and asks for confirmation. Nothing is modified until you answer `y`. Pass `--yes` to skip the prompt.
 <img src="./assets/icons/feature.svg" alt="" width="18" height="18" align="absmiddle"> **Relative track numbering** – track number = the file's rank among the files that are actually present.
@@ -71,7 +71,7 @@ It also handles a common real-world problem: **incomplete series**. If you only 
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Requirements
+## <img src="./assets/icons/formats.svg" alt="" width="28" height="28" align="absmiddle"> Requirements
 
 - Python **3.6** or newer
 - [mutagen](https://mutagen.readthedocs.io/) (audio tag library)
@@ -89,7 +89,7 @@ pip install mutagen
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Installation
+## <img src="./assets/icons/install.svg" alt="" width="28" height="28" align="absmiddle"> Installation
 
 ```bash
 git clone https://github.com/eldqyqy2007/audio-track-numbers.git
@@ -101,7 +101,7 @@ Or download `set_track_numbers.py` and run it directly.
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Usage
+## <img src="./assets/icons/usage.svg" alt="" width="28" height="28" align="absmiddle"> Usage
 
 Pass the folder path as an argument:
 
@@ -153,7 +153,7 @@ Answer `n` at the confirmation prompt to cancel; no file is changed. If every fi
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> How it works
+## <img src="./assets/icons/track.svg" alt="" width="28" height="28" align="absmiddle"> How it works
 
 1. **Collect** – finds all supported audio files in the folder (sub-folders are not searched) and sorts them naturally by name.
 2. **Detect** – scores every number in each file name and picks the most likely track number. Explicit labels (`Track 7`, `#12`) score highest; years, bitrates, and disc numbers score lowest. If nothing scores well, the file is treated as "no number".
@@ -170,7 +170,7 @@ Answer `n` at the confirmation prompt to cancel; no file is changed. If every fi
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Honest limitations
+## <img src="./assets/icons/limits.svg" alt="" width="28" height="28" align="absmiddle"> Honest limitations
 
 - **Track Total counts every supported audio file in the folder.** If the folder mixes several albums or series, keep each one in its own folder.
 - **Only tags change.** File names and audio content are never modified.
@@ -182,7 +182,7 @@ Answer `n` at the confirmation prompt to cancel; no file is changed. If every fi
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Troubleshooting
+## <img src="./assets/icons/tooling.svg" alt="" width="28" height="28" align="absmiddle"> Troubleshooting
 
 **"The 'mutagen' library is required"**
 Install it with `pip install mutagen`.
@@ -198,7 +198,7 @@ Check their names for other numbers (dates, parts). Rename them so the track num
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> Contributing
+## <img src="./assets/icons/features.svg" alt="" width="28" height="28" align="absmiddle"> Contributing
 
 Issues and pull requests are welcome. Ideas for future improvements:
 
@@ -208,6 +208,6 @@ Issues and pull requests are welcome. Ideas for future improvements:
 
 ---
 
-## <img src="./assets/icons/section.svg" alt="" width="28" height="28" align="absmiddle"> License
+## <img src="./assets/icons/license.svg" alt="" width="28" height="28" align="absmiddle"> License
 
 This project is licensed under the [MIT License](LICENSE).
